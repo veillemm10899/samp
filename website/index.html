@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>HOT Creation — Video Creation Studio</title>
+  <meta name="description" content="Hot Creation is a video creation studio. Realistic films, 3D animation, explainers and music videos, from one idea to a finished video." />
+  <meta name="theme-color" content="#FBF6F1" />
+  <link rel="icon" href="assets/flame.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    // show the brand intro only on the first page view of a visit
+    (function () {
+      var c = document.documentElement.classList;
+      try {
+        if (/nointro/.test(location.search) || sessionStorage.getItem("hc-intro") || matchMedia("(prefers-reduced-motion: reduce)").matches) c.add("intro-seen");
+        else { sessionStorage.setItem("hc-intro", "1"); c.add("intro-on"); }
+      } catch (e) { c.add("intro-seen"); }
+    })();
+  </script>
+</head>
+<body id="top">
+  <!-- brand intro, shown once per visit -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__mark">
+      <svg><use href="#flame" /></svg>
+      <span class="brand__word"><b>HOT</b><span>CREATION</span></span>
+    </div>
+  </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span>Play</span></div>
+
+  <!-- Shared flame mark -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="flameGrad" x1="0.85" y1="0.05" x2="0.2" y2="0.95">
+        <stop offset="0" stop-color="#FF7A9C" />
+        <stop offset="1" stop-color="#FF4D3D" />
+      </linearGradient>
+      <symbol id="flame" viewBox="0 0 100 122">
+        <path fill="url(#flameGrad)" d="M53 3c-1 17-10 27-22 40C17 58 8 71 8 88c0 19 18 32 42 32s42-13 42-33c0-15-6-26-14-40-2 7-5 12-11 13 3-9 5-20 1-31C64 17 59 9 53 3z" />
+        <path fill="#fff" stroke="#fff" stroke-width="6" stroke-linejoin="round" d="M40 72v28l24-14z" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="nav__progress" aria-hidden="true"><span id="scrollProgress"></span></div>
+    <div class="nav__inner container">
+      <a href="#top" class="brand js-top" aria-label="HOT Creation, go to top of page">
+        <svg class="brand__mark" aria-hidden="true"><use href="#flame" /></svg>
+        <span class="brand__word"><b>HOT</b><span>CREATION</span></span>
+      </a>
+
+      <!-- same order as the sections on the page -->
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#styles">What we make</a>
+        <a href="#work">Work</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a href="#contact" class="btn btn--primary btn--sm">Start a Project
+          <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <a href="#styles">What we make</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn--primary">Start a Project</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============
+         Background = blurred, zoomed copy of the playing carousel video.
+         A fixed cream "frost" layer sits on top, so text colour never changes. -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <img id="heroBgPoster" alt="" />
+        <canvas id="heroBgCanvas" width="405" height="720"></canvas>
+      </div>
+      <div class="hero__frost" aria-hidden="true"></div>
+
+      <div class="viewfinder" aria-hidden="true">
+        <span class="vf vf--tl"></span><span class="vf vf--tr"></span><span class="vf vf--bl"></span><span class="vf vf--br"></span>
+        <span class="vf__rec"><i></i>REC</span>
+        <span class="vf__tc" id="heroTimecode">00:00:00:00</span>
+      </div>
+
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="kicker reveal"><span class="kicker__dot" aria-hidden="true"></span>Video creation studio · Now taking projects</p>
+          <h1 class="hero__title reveal">
+            Video Creation,
+            <em>Made for You.</em>
+          </h1>
+          <p class="hero__lead reveal">
+            Hot Creation is a video creation studio. We make realistic films, 3D animation, explainers and music videos, from one idea to a finished video.
+          </p>
+          <div class="hero__ctas reveal">
+            <a href="#work" class="btn btn--primary">View Our Work
+              <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="#contact" class="btn btn--line">Start a Project</a>
+          </div>
+          <p class="hero__now reveal" aria-live="polite">
+            <span class="hero__now-label">Now playing</span>
+            <span id="heroNow"></span>
+          </p>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="hero__stage" id="heroStage" role="region" aria-roledescription="carousel" aria-label="Featured videos" tabindex="0">
+            <!-- slides are added by script.js -->
+            <div class="screen" id="heroScreen">
+              <video id="heroVideo" muted playsinline autoplay preload="auto"></video>
+              <button class="screen__sound" id="heroSound" type="button" aria-label="Turn sound on" aria-pressed="false">
+                <svg class="i icon-muted" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM23 9l-6 6M17 9l6 6"/></svg>
+                <svg class="i icon-sound" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+              </button>
+              <div class="screen__progress" aria-hidden="true"><span id="heroProgress"></span></div>
+            </div>
+          </div>
+
+          <div class="hero__controls">
+            <button class="round-btn" type="button" data-step="-1" aria-label="Previous video">
+              <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M15 18 9 12l6-6"/></svg>
+            </button>
+            <span class="hero__count" id="heroCount">01 / 07</span>
+            <button class="round-btn" type="button" data-step="1" aria-label="Next video">
+              <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="dots" id="heroDots" role="group" aria-label="Choose a video"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <section class="strip" aria-label="What we can make">
+      <div class="strip__track">
+        <ul class="strip__list">
+          <li>Characters</li><li class="o">Real-looking people</li><li>Products</li><li class="o">Places</li><li>Stories</li><li class="o">Songs</li><li>Any style, any format</li>
+        </ul>
+        <ul class="strip__list" aria-hidden="true">
+          <li>Characters</li><li class="o">Real-looking people</li><li>Products</li><li class="o">Places</li><li>Stories</li><li class="o">Songs</li><li>Any style, any format</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ WHAT WE MAKE ============ -->
+    <section class="section" id="styles">
+      <div class="container">
+        <div class="head reveal">
+          <p class="eyebrow"><span>01</span>What we make</p>
+          <h2 class="title">One studio.<br /><em>Every style.</em></h2>
+          <p class="lead">Pick a look, or mix a few. Every video is built from scratch around your idea.</p>
+        </div>
+        <ol class="style-list" id="styleList"><!-- filled by script.js --></ol>
+      </div>
+      <div class="peek" id="peek" aria-hidden="true"><img alt="" /></div>
+    </section>
+
+    <!-- ============ WORK ============ -->
+    <section class="section section--blush" id="work">
+      <div class="container">
+        <div class="head head--split reveal">
+          <div>
+            <p class="eyebrow"><span>02</span>Portfolio</p>
+            <h2 class="title">Recent <em>work.</em></h2>
+          </div>
+          <p class="lead work__intro" id="workIntro" aria-live="polite">Every video below was made in our studio, from first frame to final cut.</p>
+        </div>
+
+        <!-- sticky filter bar: stays under the menu while you scroll the portfolio -->
+        <div class="filterbar" id="filterbar">
+          <div class="tabs" role="tablist" aria-label="Filter portfolio"><!-- filled by script.js --></div>
+        </div>
+        <div class="work__status" aria-live="polite">
+          <span class="work__status-label">Now showing</span>
+          <strong id="workCat">All work</strong>
+          <span class="work__status-count" id="workCount"></span>
+        </div>
+        <div class="work-grid" id="workGrid"><!-- filled by script.js --></div>
+        <div class="work-empty" id="workEmpty" hidden>
+          <svg class="work-empty__mark" aria-hidden="true"><use href="#flame" /></svg>
+          <p class="work-empty__label">In production</p>
+          <h3 class="work-empty__title">New <span id="emptyCat">films</span> are on the way.</h3>
+          <p class="work-empty__text">We’re finishing new work in this style. Want yours to be one of the first? Tell us what you have in mind.</p>
+          <a href="#contact" class="btn btn--primary">Start a Project
+            <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="head reveal">
+          <p class="eyebrow"><span>03</span>Process</p>
+          <h2 class="title">You bring the idea.<br /><em>We do the rest.</em></h2>
+        </div>
+
+        <ol class="timeline">
+          <li class="timeline__item reveal">
+            <span class="timeline__num">01</span>
+            <h3>Share your idea</h3>
+            <p>A line, a script, a product or a song. Tell us what you want people to feel.</p>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__num">02</span>
+            <h3>We create it</h3>
+            <p>Visuals, voice, music and editing, all handled by our studio under one roof.</p>
+          </li>
+          <li class="timeline__item reveal">
+            <span class="timeline__num">03</span>
+            <h3>Get your video</h3>
+            <p>A finished, ready-to-post video in the format you need: 9:16, 16:9 or 1:1.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section section--about" id="about">
+      <div class="container about">
+        <div class="about__side reveal">
+          <p class="eyebrow"><span>04</span>About</p>
+          <svg class="about__mark" aria-hidden="true"><use href="#flame" /></svg>
+        </div>
+        <div class="about__main reveal">
+          <h2 class="about__name">Hot Creation</h2>
+          <p class="about__quote">We’re a video generation studio that turns <b>ideas into finished videos.</b> You bring the idea; <em>we handle the visuals, voice, music and editing.</em></p>
+          <p class="about__list">Visuals <i>·</i> Voice <i>·</i> Music <i>·</i> Editing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============
+         CHANGE: put your real email in data-email below and in the two links. -->
+    <section class="contact" id="contact" data-email="hello@hotcreation.com">
+      <div class="container contact__grid">
+        <div class="contact__intro reveal">
+          <p class="eyebrow"><span>05</span>Contact</p>
+          <h2 class="contact__title">Have a video <em>in mind?</em></h2>
+          <p class="lead">Tell us what you want to make. Share a few details and we’ll come back to you with ideas, a plan and a timeline.</p>
+
+          <dl class="contact__facts">
+            <div>
+              <dt>Email</dt>
+              <dd><a class="contact__mail" href="mailto:hello@hotcreation.com">hello@hotcreation.com</a></dd>
+            </div>
+            <div>
+              <dt>Formats</dt>
+              <dd>9:16 · 16:9 · 1:1</dd>
+            </div>
+            <div>
+              <dt>We make</dt>
+              <dd>Films · Animation · Explainers · Music videos</dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="brief reveal" id="briefForm" novalidate>
+          <p class="brief__step">Project brief</p>
+
+          <fieldset class="brief__types">
+            <legend>What would you like to make?</legend>
+            <div class="chips" id="briefTypes"><!-- filled by script.js --></div>
+          </fieldset>
+
+          <div class="field">
+            <label for="bName">Your name</label>
+            <input id="bName" name="name" type="text" autocomplete="name" required />
+            <p class="field__error" id="bNameErr" hidden>Please add your name.</p>
+          </div>
+          <div class="field">
+            <label for="bEmail">Email</label>
+            <input id="bEmail" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="bEmailErr" />
+            <p class="field__error" id="bEmailErr" hidden>Please add an email we can reply to, like name@company.com.</p>
+          </div>
+          <div class="field">
+            <label for="bIdea">Tell us about your idea</label>
+            <textarea id="bIdea" name="idea" rows="4" placeholder="A product launch, a short film, a song… anything."></textarea>
+          </div>
+
+          <div class="brief__send">
+            <button class="btn btn--primary btn--lg" type="submit">Send project brief
+              <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <p class="brief__note" id="briefNote" aria-live="polite">Opens your email app with your brief filled in.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__cols">
+        <div class="footer__brand">
+          <a href="#top" class="brand js-top" aria-label="HOT Creation, back to top">
+            <svg class="brand__mark" aria-hidden="true"><use href="#flame" /></svg>
+            <span class="brand__word"><b>HOT</b><span>CREATION</span></span>
+          </a>
+          <p class="footer__about">A video creation studio. Realistic films, 3D animation, explainers and music videos, from one idea to a finished video.</p>
+          <a href="#contact" class="btn btn--primary btn--sm">Start a Project
+            <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+
+        <nav class="footer__col" aria-label="Explore">
+          <p class="footer__head">Explore</p>
+          <a href="#styles">What we make</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <nav class="footer__col" aria-label="Categories">
+          <p class="footer__head">Categories</p>
+          <div id="footerCats"><!-- filled by script.js --></div>
+        </nav>
+
+        <div class="footer__col">
+          <p class="footer__head">Get in touch</p>
+          <a href="mailto:hello@hotcreation.com">hello@hotcreation.com</a>
+          <a href="#contact">Send a project brief</a>
+        </div>
+      </div>
+
+      <!-- SVG text stretches to fit, so the full name always shows on any screen -->
+      <svg class="footer__big" viewBox="0 0 1000 118" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="footGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FF7A9C" stop-opacity=".55" />
+            <stop offset="1" stop-color="#FF4D3D" stop-opacity=".08" />
+          </linearGradient>
+        </defs>
+        <text x="0" y="100" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="url(#footGrad)">HOT CREATION</text>
+      </svg>
+
+      <div class="footer__bar">
+        <p>© <span id="year"></span> Hot Creation. All rights reserved.</p>
+        <button class="footer__top-btn js-top" type="button">Back to top
+          <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+    <div class="lightbox__backdrop" data-close></div>
+    <div class="lightbox__panel">
+      <button class="lightbox__close" data-close aria-label="Close video">
+        <svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="lightbox__frame">
+        <video id="lbVideo" controls playsinline></video>
+        <p class="lightbox__msg" id="lbMsg" role="status" hidden>This film is still being prepared. Please check back in a few minutes.</p>
+      </div>
+      <div class="lightbox__meta">
+        <h3 id="lbTitle"></h3>
+        <p id="lbSub"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="media/library.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Raw video masters: too large for GitHub (files up to ~900 MB, limit is 100 MB)
+VIDEOS/
+
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store

@@ -1,0 +1,36 @@
+HOT CREATION WEBSITE — HOW TO UPDATE
+=====================================
+
+ADD A VIDEO
+  1. Put the video in its category folder inside VIDEOS:
+       01 Realistic & Cinematic
+       02 3D & Pixar-Style Animation
+       03 CGI & Product Visuals
+       04 Explainers
+       05 Music & Song Videos
+       06 Social Content
+       07 Brand & Promo Films
+     Any format works (MP4, MOV, HEVC...).
+  2. Double-click "Update Website.bat" and wait until it says Done.
+  3. Double-click "Preview Website.bat" (or press Ctrl+F5 if it's already open).
+
+REMOVE A VIDEO
+  Delete it from VIDEOS, then run "Update Website.bat".
+
+MOVE A VIDEO TO ANOTHER CATEGORY
+  Move it to the other folder, then run "Update Website.bat". Its title is kept.
+
+RENAME A VIDEO / CHOOSE THE TOP CAROUSEL VIDEOS
+  Open website\media\library.js in any text editor:
+    "title"    = name shown on the website
+    "featured" = true  -> also plays in the top phone carousel
+
+GOING LIVE
+  Upload everything inside the "website" folder to your web host.
+  (VIDEOS, Logo and tools stay on your computer.)
+
+FOLDERS
+  VIDEOS    your original videos (by category)
+  website   the finished website
+  Logo      brand logo files
+  tools     the update script (no need to open)
